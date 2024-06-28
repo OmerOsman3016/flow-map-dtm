@@ -241,6 +241,17 @@
       return legend;
     };
     legend.addTo(map);
+    // Add GeoJSON layer to the map
+        L.geoJSON(geojsonFeature).addTo(map);
+
+        // Fetch and add GeoJSON from an external file
+        fetch(''./data/fr.geojson')
+            .then(response => response.json())
+            .then(data => {
+                L.geoJSON(data).addTo(map);
+            })
+            .catch(error => console.error('Error loading the GeoJSON file:', error));
+    </script>
   </script>
 
 </body>
