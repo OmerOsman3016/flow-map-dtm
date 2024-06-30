@@ -216,8 +216,14 @@
       });
     }
 
-    document.getElementById('showAllPoints').addEventListener('click', showAllPoints);
-    document.getElementById('showPointByPoint').addEventListener('click', showPointByPoint);
+    document.getElementById('showAllPoints').addEventListener('click', function () {
+      showAllPoints();
+      map.off('click'); // Disable point-by-point mode
+    });
+    document.getElementById('showPointByPoint').addEventListener('click', function () {
+      map.off('click'); // Ensure no previous click handlers are active
+      showPointByPoint();
+    });
 
     initializeMap();
 
