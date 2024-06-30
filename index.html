@@ -37,14 +37,27 @@
       border-radius: 5px;
       box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
     }
+
+    #showAllPoints {
+      position: absolute;
+      bottom: 50px;
+      left: 10px;
+      z-index: 1000;
+      background: white;
+      padding: 10px;
+      border-radius: 5px;
+      box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+    }
   </style>
 </head>
 
 <body>
   <div id="map"></div>
   <div id="controls">
-    <button id="showAllPoints">Show All Points</button>
     <button id="showPointByPoint">Show Point by Point</button>
+  </div>
+  <div id="showAllPoints">
+    <button>Show All Points</button>
   </div>
 
   <!-- first load LeafletJS -->
@@ -234,6 +247,7 @@
     legend.onAdd = function (map) {
       var legend = L.DomUtil.create('div', 'legend');
       legend.innerHTML =
+        '<button id="showAllPoints">Show All Points</button><br/>' +
         '<div style="width:17px;height:17px;background:rgba(255, 103, 31, 0.8) ;float:left;margin-right:10px;border-radius:30px"></div>' + '<span style="float:left;margin-top:1px; font-weight:bold"> Border Point </span>' + '<br/>' + '<br/>' +
         '<div style="width:17px;height:17px;background:rgba(0, 51, 160, 0.8) ;float:left;margin-right:10px;border-radius:30px"></div>' + '<span style="float:left;margin-top:1px; font-weight:bold"> Province of Return </span>' + '<br/>' + '<br/>' +
         '<span style="font-size: 14px"> Flow:</span>' + '<br/>' +
