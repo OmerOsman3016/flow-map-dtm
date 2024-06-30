@@ -179,10 +179,8 @@
         }
 
         // immediately select all origin points for Bezier path display
-        var originIds = results.data.map(datum => datum.s_state_id);
-        originIds.forEach(id => {
-          oneToManyFlowmapLayer.selectFeaturesForPathDisplayById('s_state_id', id, true, 'SELECTION_NEW');
-        });
+        var originFeatures = geoJsonFeatureCollection.features.filter(feature => feature.properties.isOrigin);
+        oneToManyFlowmapLayer.selectFeaturesForPathDisplay(originFeatures, 'SELECTION_NEW');
       }
     });
 
