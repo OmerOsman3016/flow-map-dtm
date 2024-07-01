@@ -81,12 +81,12 @@
           })
         };
 
-        var borderColors = {
-          'B01': '#ffb81c', // Example color for border point B01
-          'B02': '#ff671f', // Example color for border point B02
-          // Add more border points and colors as needed
-          'B03': '#d22630',
-          'B04': '#2a9d8f'
+        var localityColors = {
+          'L01': '#ffb81c', // Example color for locality L01
+          'L02': '#ff671f', // Example color for locality L02
+          // Add more locality IDs and colors as needed
+          'L03': '#d22630',
+          'L04': '#2a9d8f'
         };
 
         var oneToManyFlowmapLayer = L.canvasFlowmapLayer(geoJsonFeatureCollection, {
@@ -124,12 +124,12 @@
           canvasBezierStyle: {
             type: 'simple',
             symbol: function(geoJsonFeature) {
-              var borderPoint = geoJsonFeature.properties.s_state_id;
+              var locality = geoJsonFeature.properties.e_locality_id;
               return {
-                strokeStyle: borderColors[borderPoint] || '#e7e1ef',
+                strokeStyle: localityColors[locality] || '#e7e1ef',
                 lineWidth: 2,
                 lineCap: 'round',
-                shadowColor: borderColors[borderPoint] || '#e7e1ef',
+                shadowColor: localityColors[locality] || '#e7e1ef',
                 shadowBlur: 1.5
               };
             },
