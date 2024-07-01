@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html>
 
 <head>
@@ -171,7 +171,7 @@
           onEachFeature: TooltipName
         }).addTo(map);
 
-        //create tooltip function on hover
+        // Create tooltip function on hover
         function TooltipName(feature, layer) {
           layer.on('mouseover', function(e) {
             this.openPopup();
@@ -188,7 +188,7 @@
       }
     });
 
-    //Adding Legend to the map
+    // Adding Legend to the map
     var legend = L.control({
       position: 'bottomleft'
     });
@@ -198,12 +198,13 @@
         '<div style="width:17px;height:17px;background:rgba(255, 103, 31, 0.8) ;float:left;margin-right:10px;border-radius:30px"></div>' + '<span style="float:left;margin-top:1px; font-weight:bold"> Border Point </span>' + '<br/>' + '<br/>' +
         '<div style="width:17px;height:17px;background:rgba(0, 51, 160, 0.8) ;float:left;margin-right:10px;border-radius:30px"></div>' + '<span style="float:left;margin-top:1px; font-weight:bold"> Province of Return </span>' + '<br/>' + '<br/>' +
         '<span style="font-size: 14px"> Flow:</span>' + '<br/>' +
-        '<div style="width:70px;height:3px;background:#ffb81c ;float:left;margin-right:10px;margin-top:10px"></div><span style="float:left; font-weight:bold"> < 10,000</span>' + '<br/>' +
+        '<div style="width:70px;height:3px;background:#ffb81c ;float:left;margin-right:10px;margin-top:10px"></div><span style="float:left; font-weight:bold"> < 15,000</span>' + '<br/>' +
         '<div style="width:70px;height:4px;background:#ff671f ;float:left;margin-right:10px;;margin-top:10px"></div><span style="float:left; font-weight:bold">10,001 - 50,000</span>' + '<br/>' +
         '<div style="width:70px;height:7px;background:#e34a33 ;float:left;margin-right:10px;;margin-top:10px"></div><span style="float:left; font-weight:bold"> > 50,000</span>' + '<br/>'
       return legend;
     };
     legend.addTo(map);
+
   </script>
 </body>
 
