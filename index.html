@@ -62,7 +62,7 @@
     }).addTo(map);
 
     // Load and add GeoJSON files for Iran and Pakistan
-    function addGeoJsonLayer(url, map) {
+    function addGeoJsonLayer(url, map, opacity = 1) {
       fetch(url)
         .then(response => response.json())
         .then(data => {
@@ -71,7 +71,7 @@
               return {
                 color: "#ff7800",
                 weight: 1,
-                opacity: 0.65
+                opacity: opacity
               };
             }
           }).addTo(map);
@@ -79,7 +79,7 @@
     }
 
     addGeoJsonLayer('./data/iran.geojson', map);
-    addGeoJsonLayer('./data/pakistan.geojson', map);
+    addGeoJsonLayer('./data/pakistan.geojson', map, 0.2);
 
     Papa.parse('./data/data.csv', {
       download: true,
