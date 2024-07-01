@@ -50,6 +50,11 @@
       <option value="medium">10,001 - 50,000</option>
       <option value="high">> 50,000</option>
     </select>
+    <br />
+    <label for="stateFilter">Border Point:</label>
+    <select id="stateFilter">
+      <option value="all">All</option>
+    </select>
   </div>
 
   <!-- first load LeafletJS -->
@@ -81,6 +86,7 @@
     }).addTo(map);
 
     var flowmapLayer;
+    var originalData;
 
     function updateFlowmapLayer(data) {
       if (flowmapLayer) {
@@ -224,33 +230,23 @@
       skipEmptyLines: true,
       complete: function (results) {
         // Store the original data
-        var originalData = results.data;
+        originalData = results.data;
 
-        // Filter the data based on the selected volume
-        function filterData(volume) {
-          if (volume === 'low') {
-            return originalData.filter(function (d) { return d.e_Volume <= 10000; });
-                     return originalData.filter(function (d) { return d.e_Volume <= 10000; });
-          } else if (volume === 'medium') {
-            return originalData.filter(function (d) { return d.e_Volume > 10000 && d.e_Volume <= 50000; });
-          } else if (volume === 'high') {
-            return originalData.filter(function (d) { return d.e_Volume > 50000; });
-          } else {
-            return originalData;
-          }
-        }
-
-        // Initialize the flow map layer with the original data
-        updateFlowmapLayer(originalData);
-
-        // Add event listener to the filter control
-        document.getElementById('volumeFilter').addEventListener('change', function (e) {
-          var selectedVolume = e.target.value;
-          var filteredData = filterData(selectedVolume);
-          updateFlowmapLayer(filteredData);
+        // Populate state filter options
+        var states = Array.from(new Set(originalData.map(function (d) { return d.s_State; })));
+        var stateFilter = document.getElementById('stateFilter');
+        states.forEach(function (state) {
+          var option = document.createElement('option');
+          option.value = state;
+          option.text = state;
+          stateFilter.appendChild(option);
         });
-      }
-    });
+
+        // Filter the data based on the selected volume and state
+        function filterData(volume, state) {
+          return originalData.filter(function (d) {
+            var volumeMatch = (volume === 'all') ||
+
 
     // Adding Legend to the map
     var legend = L.control({
@@ -262,7 +258,7 @@
         '<div style="width:17px;height:17px;background:rgba(255, 103, 31, 0.8) ;float:left;margin-right:10px;border-radius:30px"></div>' + '<span style="float:left;margin-top:1px; font-weight:bold"> Border Point </span>' + '<br/>' + '<br/>' +
         '<div style="width:17px;height:17px;background:rgba(0, 51, 160, 0.8) ;float:left;margin-right:10px;border-radius:30px"></div>' + '<span style="float:left;margin-top:1px; font-weight:bold"> Province of Return </span>' + '<br/>' + '<br/>' +
         '<span style="font-size: 14px"> Flow:</span>' + '<br/>' +
-        '<div style="width:70px;height:3px;background:#ffb81c ;float:left;margin-right:10px;margin-top:10px"></div><span style="float:left; font-weight:bold"> < 1,000</span>' + '<br/>' +
+        '<div style="width:70px;height:3px;background:#ffb81c ;float:left;margin-right:10px;margin-top:10px"></div><span style="float:left; font-weight:bold"> < 10,000</span>' + '<br/>' +
         '<div style="width:70px;height:4px;background:#ff671f ;float:left;margin-right:10px;;margin-top:10px"></div><span style="float:left; font-weight:bold">10,001 - 50,000</span>' + '<br/>' +
         '<div style="width:70px;height:7px;background:#e34a33 ;float:left;margin-right:10px;;margin-top:10px"></div><span style="float:left; font-weight:bold"> > 50,000</span>' + '<br/>'
       return legend;
