@@ -82,8 +82,8 @@
         };
 
         var localityColors = {
-          'AF26': '#1063C2',
-          'AF04': '#C210BA',
+          'AF26': '#ffb81c',
+          'AF04': '#ff671f',
           'AF25': '#d22630',
           'AF18': '#2a9d8f',
           'AF22': '#e9c46a',
@@ -150,29 +150,17 @@
             }
           },
           canvasBezierStyle: {
-            type: 'classBreaks',
-            classBreakInfos: Object.keys(localityColors).map(function(locality) {
+            type: 'simple',
+            symbol: function(geoJsonFeature) {
+              var locality = geoJsonFeature.properties.e_locality_id;
+              var color = localityColors[locality] || '#e7e1ef';
               return {
-                classMinValue: 1,
-                classMaxValue: Infinity,
-                symbol: {
-                  strokeStyle: localityColors[locality],
-                  lineWidth: 2,
-                  lineCap: 'round',
-                  shadowColor: localityColors[locality],
-                  shadowBlur: 2
-                },
-                filter: function(geoJsonFeature) {
-                  return geoJsonFeature.properties.e_locality_id === locality;
-                }
+                strokeStyle: color,
+                lineWidth: 2,
+                lineCap: 'round',
+                shadowColor: color,
+                shadowBlur: 1.5
               };
-            }),
-            defaultSymbol: {
-              strokeStyle: '#e7e1ef',
-              lineWidth: 2,
-              lineCap: 'round',
-              shadowColor: '#e7e1ef',
-              shadowBlur: 1.5
             }
           },
           pathDisplayMode: 'all',
@@ -180,7 +168,7 @@
           animationEasingFamily: 'Linear',
           animationEasingType: 'None',
           animationDuration: 2000,
-          onEachFeature: TooltipName,
+          onEachFeature: TooltipName
         }).addTo(map);
 
         //create tooltip function on hover
@@ -196,8 +184,7 @@
           } else {
             layer.bindTooltip("Province of Return: " + feature.properties.e_locality);
           }
-        };
-
+        }
       }
     });
 
@@ -211,13 +198,12 @@
         '<div style="width:17px;height:17px;background:rgba(255, 103, 31, 0.8) ;float:left;margin-right:10px;border-radius:30px"></div>' + '<span style="float:left;margin-top:1px; font-weight:bold"> Border Point </span>' + '<br/>' + '<br/>' +
         '<div style="width:17px;height:17px;background:rgba(0, 51, 160, 0.8) ;float:left;margin-right:10px;border-radius:30px"></div>' + '<span style="float:left;margin-top:1px; font-weight:bold"> Province of Return </span>' + '<br/>' + '<br/>' +
         '<span style="font-size: 14px"> Flow:</span>' + '<br/>' +
-        '<div style="width:70px;height:3px;background:#ffb81c ;float:left;margin-right:10px;margin-top:10px"></div><span style="float:left; font-weight:bold"> < 1,000</span>' + '<br/>' +
+        '<div style="width:70px;height:3px;background:#ffb81c ;float:left;margin-right:10px;margin-top:10px"></div><span style="float:left; font-weight:bold"> < 10,000</span>' + '<br/>' +
         '<div style="width:70px;height:4px;background:#ff671f ;float:left;margin-right:10px;;margin-top:10px"></div><span style="float:left; font-weight:bold">10,001 - 50,000</span>' + '<br/>' +
         '<div style="width:70px;height:7px;background:#e34a33 ;float:left;margin-right:10px;;margin-top:10px"></div><span style="float:left; font-weight:bold"> > 50,000</span>' + '<br/>'
       return legend;
     };
     legend.addTo(map);
-
   </script>
 </body>
 
