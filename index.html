@@ -1,4 +1,4 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 
 <head>
@@ -159,15 +159,15 @@
 
       oneToManyFlowmapLayer = L.canvasFlowmapLayer(filteredCollection, {
         originAndDestinationFieldIds: {
-          originUniqueIdField: 's_state_id',
+          originUniqueIdField: 'e_locality_id',  // Changed from 's_state_id' to 'e_locality_id'
           originGeometry: {
-            x: 's_lon',
-            y: 's_lat'
+            x: 'e_lon',  // Changed from 's_lon' to 'e_lon'
+            y: 'e_lat'   // Changed from 's_lat' to 'e_lat'
           },
-          destinationUniqueIdField: 'e_locality_id',
+          destinationUniqueIdField: 's_state_id',  // Changed from 'e_locality_id' to 's_state_id'
           destinationGeometry: {
-            x: 'e_lon',
-            y: 'e_lat'
+            x: 's_lon',  // Changed from 'e_lon' to 's_lon'
+            y: 's_lat'   // Changed from 'e_lat' to 's_lat'
           }
         },
         style: function(geoJsonFeature) {
@@ -265,7 +265,7 @@
         '<div style="width:17px;height:17px;background:rgba(255, 103, 31, 0.8) ;float:left;margin-right:10px;border-radius:30px"></div>' + '<span style="float:left;margin-top:1px; font-weight:bold"> Border Point </span>' + '<br/>' + '<br/>' +
         '<div style="width:17px;height:17px;background:rgba(0, 51, 160, 0.8) ;float:left;margin-right:10px;border-radius:30px"></div>' + '<span style="float:left;margin-top:1px; font-weight:bold"> Province of Return </span>' + '<br/>' + '<br/>' +
         '<span style="font-size: 14px"> Flow:</span>' + '<br/>' +
-        '<div style="width:70px;height:3px;background:#AED6F1 ;float:left;margin-right:10px;margin-top:10px"></div><span style="float:left; font-weight:bold"> < 10,000</span>' + '<br/>' +
+        '<div style="width:70px;height:3px;background:#AED6F1 ;float:left;margin-right:10px;margin-top:10px"></div><span style="float:left; font-weight:bold"> < 30,000</span>' + '<br/>' +
         '<div style="width:70px;height:4px;background:#3498DB ;float:left;margin-right:10px;;margin-top:10px"></div><span style="float:left; font-weight:bold">10,001 - 50,000</span>' + '<br/>' +
         '<div style="width:70px;height:7px;background:#21618C ;float:left;margin-right:10px;;margin-top:10px"></div><span style="float:left; font-weight:bold"> > 50,000</span>' + '<br/>'
       return legend;
