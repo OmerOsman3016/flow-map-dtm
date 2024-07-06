@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html>
 
 <head>
@@ -74,26 +74,6 @@
     L.tileLayer('https://api.mapbox.com/styles/v1/omerosman/clxz0kwyr002001pf455vb6gz/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1Ijoib21lcm9zbWFuIiwiYSI6ImUxZDBkODBlNjQxMDE2M2Y3OTQ3MWIwNTJkMjgzZTI3In0.ekCHuxRflTOO0RpQ6rQR7Q', {
       attribution: 'Map data &copy; <a href="https://www.mapbox.com/">Mapbox</a> contributors'
     }).addTo(map);
-
-    // Load and add GeoJSON files with different colors
-    function addGeoJsonLayer(url, map, color, opacity = 1) {
-      fetch(url)
-        .then(response => response.json())
-        .then(data => {
-          L.geoJSON(data, {
-            style: function(feature) {
-              return {
-                color: color,
-                weight: 1,
-                opacity: opacity
-              };
-            }
-          }).addTo(map);
-        });
-    }
-
-    addGeoJsonLayer('./data/iran.geojson', map, "#3382BF", 0.2);
-    addGeoJsonLayer('./data/pakistan.geojson', map, "#89C1EC", 0.2);
 
     let geoJsonFeatureCollection;
 
