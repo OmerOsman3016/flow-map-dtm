@@ -1,4 +1,4 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 
 <head>
@@ -76,6 +76,17 @@
     }).addTo(map);
 
     let geoJsonFeatureCollection;
+
+    // Load GeoJSON data
+    fetch('./data/your-geojson-file.geojson')
+      .then(response => response.json())
+      .then(geojsonData => {
+        L.geoJson(geojsonData, {
+          onEachFeature: function (feature, layer) {
+            layer.bindPopup(feature.properties.name);  // Adjust property name accordingly
+          }
+        }).addTo(map);
+      });
 
     Papa.parse('./data/data.csv', {
       download: true,
